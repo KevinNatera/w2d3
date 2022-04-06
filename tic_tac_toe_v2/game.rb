@@ -3,20 +3,19 @@ require_relative './human_player.rb'
 
 class Game
 
-    def initialize(mark_1,mark_2)
-        @currentPlayer = Human_player.new(mark_1)
-        @playerOne = @currentPlayer
-        @playerTwo = Human_player.new(mark_2)
-        @board = Board.new
+    def initialize(n,*marks)
+        @board = Board.new(n)
+        @players = []
+        marks.each do |mark|
+            @players << Human_player.new(mark)
+        end
+        @currentPlayer = @players[0]
     end
 
 
     def switch_turn
-        if @currentPlayer == @playerOne
-            @currentPlayer = @playerTwo
-        else
-            @currentPlayer = @playerOne
-        end
+        @players = @players.rotate(1)
+        @currentPlayer = @players[0]
     end
 
 
