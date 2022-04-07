@@ -6,18 +6,17 @@ class Human_player
     end
 
 
-    def get_position
-        puts "It's player #{@mark}'s turn. Enter two numbers with a space in between to indicate position. eg.'2 1' "
-    input = gets.chomp
-    arr = input.split(" ")
-    if arr.length != 2
-        raise "Error! Invalid input!"
+    def get_position(legal_positions)
+        pos = nil
+        until legal_positions.include?(pos)
+            puts "Player #{mark}, enter two numbers representing a position in the format `row col`"
+            pos = gets.chomp.split(' ').map(&:to_i)
+            puts "#{pos} is not a legal position" if !legal_positions.include?(pos)
+            raise 'sorry, that was invalid :(' if pos.length != 2
+        end
+        pos
     end
 
-    arr.each_with_index do |num,i|
-        arr[i] = num.to_i
-    end
-    arr
-    end
 
 end
+

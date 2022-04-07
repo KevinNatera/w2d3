@@ -28,8 +28,9 @@ class Board
                 raise "Position taken!"
             end
         else
-            raise "Position invalid!"
+                raise "Position is invalid!"
         end
+        
     end
 
     
@@ -120,6 +121,18 @@ class Board
             end
         end
         bool
+    end
+
+
+    def legal_positions
+        mainArr = []
+
+        @grid.each_with_index do |row,idx1|
+            row.each_with_index do |val,idx2|
+                mainArr << [idx1,idx2] if val == "_"
+            end
+        end
+        mainArr
     end
 end
 
